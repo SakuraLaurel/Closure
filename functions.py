@@ -2,6 +2,7 @@ from glob import glob
 from functools import reduce
 from os.path import join, basename
 from pickle import dump, load
+from multiprocessing import Pool
 
 def lmap(function, iterable):
     return list(map(function, iterable))
@@ -11,6 +12,17 @@ def lreduce(function, iterable):
         return list(iterable)
     else:
         return list(reduce(function, iterable))
+
+def flip(func, *args):
+    return func(*args[::-1])
+
+def pmap(func, iter):
+    p = Pool()
+    return p.map(func, iter)
+
+def papply(func, args):
+    pass
+
 
 def find_files(filename):
     path = "/home/sakura/p5"
@@ -23,7 +35,12 @@ def find_files(filename):
     return sorted(lreduce(lambda x, y: x + y, res), key=lambda x: basename(x))
 
 
-lcs = ("forest", "grassland", "impervious", "cropland")
+lcs = {
+    "forest": "森林",
+    "grassland": "草地",
+    "impervious": "城市",
+    "cropland": "耕地"
+}
 region = {
     "forest": (40.58, 116.43, 40.51, 116.5),
     "grassland": (40.07, 115.7, 40, 115.77),
@@ -46,3 +63,14 @@ def dump_pkls(lc, date, data):
 def load_pkls(lc, date):
     with open(join(pkl_dir, f"{lc}/{date}.pkl"), "rb") as f:
         return load(f)
+
+
+# 这个东西是循环色带，很有趣，但是在本项目中不会用到
+# from matplotlib.colors import LinearSegmentedColormap
+# N_total = 256
+# colors = [(1.0, 0.0, 0.0),  # 白色
+#           (0.0, 0.4, 1.0),  # 蓝色
+#           (1.0, 1.0, 1.0),  # 深红色
+#           (0.0, 0.4, 1.0),  # 再次蓝色，为了平滑过渡
+#           (1.0, 0.0, 0.0)]  # 白色
+# cmap = LinearSegmentedColormap.from_list("housyou's cmap", colors, N=N_total )
