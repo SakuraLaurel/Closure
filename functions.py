@@ -21,9 +21,9 @@ def pmap(func, iter):
     return p.map(func, iter)
 
 def find_files(filename):
-    path = "/home/sakura/p5"
+    path = "/home/sakura/p6"
     dirs = ("/home/sakura/p1",
-            "/home/sakura/p6",
+            "/home/sakura/p5",
             path,
             join(path, "aux/dem"),
             join(path, "aux/landcover"))
