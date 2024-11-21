@@ -20,10 +20,6 @@ def pmap(func, iter):
     p = Pool()
     return p.map(func, iter)
 
-def papply(func, args):
-    pass
-
-
 def find_files(filename):
     path = "/home/sakura/p5"
     dirs = ("/home/sakura/p1",
@@ -33,7 +29,6 @@ def find_files(filename):
             join(path, "aux/landcover"))
     res = lmap(lambda dir: glob(join(dir, filename)), dirs)
     return sorted(lreduce(lambda x, y: x + y, res), key=lambda x: basename(x))
-
 
 lcs = {
     "forest": "森林",
