@@ -48,7 +48,7 @@ swath = {
     "impervious": 3,
     "cropland": 3
 }
-pkl_dir = "/home/sakura/p4/Closure/data"
+pkl_dir = "data"
 
 
 def dump_pkls(lc, date, data):
